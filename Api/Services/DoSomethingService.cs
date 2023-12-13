@@ -14,7 +14,7 @@ public class DoSomethingService
 
     public async Task DoSomethingAsync()
     {
-        var counter = _counterService.GetNext();
+        var counter = await _counterService.GetCurrentAndIncrementAsync();
         Console.WriteLine($"{nameof(DoSomethingAsync)}-{counter} started: {DateTime.Now}");
         await Task.Delay(TimeSpan.FromSeconds(5));
         Console.WriteLine($"{nameof(DoSomethingAsync)}-{counter} finished: {DateTime.Now}");
