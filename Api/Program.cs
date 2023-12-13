@@ -1,5 +1,7 @@
 using Api.Filters;
+using Api.Models.Consts;
 using Api.Models.Settings;
+using Api.Services;
 using Hangfire;
 using Hangfire.Dashboard;
 using Hangfire.Mongo;
@@ -34,6 +36,7 @@ builder.Services.AddHangfire((serviceProvider, configuration) =>
         .UseColouredConsoleLogProvider();
 });
 builder.Services.AddHangfireServer();
+builder.Services.AddSingleton<CounterService>();
 
 var app = builder.Build();
 
@@ -48,5 +51,7 @@ app.MapHangfireDashboard(new DashboardOptions
     AppPath = "/swagger",
     IsReadOnlyFunc = (DashboardContext context) => true,
 });
+
+RecurringJob.AddOrUpdate<DoSomethingService>(RecurringJobNames.DoSomething, x => x.DoSomethingAsync(), "*/15 * * * * *");
 
 app.Run();
