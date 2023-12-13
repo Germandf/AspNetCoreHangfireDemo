@@ -1,7 +1,7 @@
-﻿using MongoDB.Driver;
-using Microsoft.Extensions.Options;
+﻿using Api.Models.Entities;
 using Api.Models.Settings;
-using Api.Models.Entities;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 namespace Api.Services;
 
