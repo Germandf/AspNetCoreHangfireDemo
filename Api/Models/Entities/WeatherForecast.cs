@@ -1,4 +1,4 @@
-namespace Api;
+namespace Api.Models.Entities;
 
 public class WeatherForecast
 {
