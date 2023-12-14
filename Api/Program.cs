@@ -32,7 +32,7 @@ builder.Services.AddHangfire((serviceProvider, configuration) =>
         .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
         .UseSimpleAssemblyNameTypeSerializer()
         .UseRecommendedSerializerSettings()
-        .UseColouredConsoleLogProvider()
+        .UseColouredConsoleLogProvider((Hangfire.Logging.LogLevel)LogLevel.Warning)
         .WithStorage(dbSettings, storageImplementation);
 });
 builder.Services.AddHangfireServer();
@@ -42,7 +42,6 @@ var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
-app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 app.MapHangfireDashboard(new DashboardOptions
