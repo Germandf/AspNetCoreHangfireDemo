@@ -30,7 +30,7 @@ public class CounterService
             var filter = Builders<Counter>.Filter.Eq("_id", document.Id);
             var update = Builders<Counter>.Update.Inc(x => x.CurrentCount, 1);
             await _collection.UpdateOneAsync(filter, update);
-            return document.CurrentCount;
+            return document.CurrentCount + 1;
         }
     }
 }
