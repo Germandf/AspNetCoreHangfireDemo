@@ -2,7 +2,8 @@
 
 namespace Api.Services;
 
-[DisableConcurrentExecution(timeoutInSeconds: 60)]
+[AutomaticRetry(Attempts = 0, OnAttemptsExceeded = AttemptsExceededAction.Delete, LogEvents = false)]
+[DisableConcurrentExecution(15)]
 public class DoSomethingService
 {
     private CounterService _counterService;
