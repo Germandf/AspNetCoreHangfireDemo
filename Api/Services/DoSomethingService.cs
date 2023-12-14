@@ -2,13 +2,13 @@
 
 namespace Api.Services;
 
-[AutomaticRetry(Attempts = 0, OnAttemptsExceeded = AttemptsExceededAction.Delete, LogEvents = false)]
+[AutomaticRetry(Attempts = 0, OnAttemptsExceeded = AttemptsExceededAction.Delete, LogEvents = true)]
 [DisableConcurrentExecution(15)]
 public class DoSomethingService
 {
-    private CounterService _counterService;
+    private ICounterService _counterService;
 
-    public DoSomethingService(CounterService counterService)
+    public DoSomethingService(ICounterService counterService)
     {
         _counterService = counterService;
     }

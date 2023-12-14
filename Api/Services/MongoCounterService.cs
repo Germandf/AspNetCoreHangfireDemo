@@ -5,13 +5,13 @@ using MongoDB.Driver;
 
 namespace Api.Services;
 
-public class CounterService
+public class MongoCounterService : ICounterService
 {
     private readonly IMongoCollection<Counter> _collection;
 
-    public CounterService(IOptions<MongoDbSettings> mongoDbSettings)
+    public MongoCounterService(IOptions<DbSettings> mongoDbSettings)
     {
-        var client = new MongoClient(mongoDbSettings.Value.ConnectionString);
+        var client = new MongoClient(mongoDbSettings.Value.MongoConnectionString);
         var database = client.GetDatabase(mongoDbSettings.Value.DatabaseName);
         _collection = database.GetCollection<Counter>(nameof(Counter));
     }
